@@ -1,0 +1,109 @@
+{
+    "questions": [
+        {
+            "questionText": "What is the purpose of the 'int' data type in Python?",
+            "options": [
+                {
+                    "option": "To store floating point numbers",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store whole numbers",
+                    "isCorrectAnswer": true
+                },
+                {
+                    "option": "To store strings",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store boolean values",
+                    "isCorrectAnswer": false
+                }
+            ]
+        },
+        {
+            "questionText": "Which of the following is an example of a tuple in Python?",
+            "options": [
+                {
+                    "option": "[1, 2, 3]",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "(1, 2, 3)",
+                    "isCorrectAnswer": true
+                },
+                {
+                    "option": "{1, 2, 3}",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "{\"a\": 1, \"b\": 2}",
+                    "isCorrectAnswer": false
+                }
+            ]
+        },
+        {
+            "questionText": "What is the difference between a list and a tuple in Python?",
+            "options": [
+                {
+                    "option": "A list is immutable, while a tuple is mutable",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "A list is mutable, while a tuple is immutable",
+                    "isCorrectAnswer": true
+                },
+                {
+                    "option": "A list can only store strings, while a tuple can store any data type",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "A list can only store integers, while a tuple can store any data type",
+                    "isCorrectAnswer": false
+                }
+            ]
+        },
+        {
+            "questionText": "What is the purpose of the 'dict' data type in Python?",
+            "options": [
+                {
+                    "option": "To store a collection of key-value pairs",
+                    "isCorrectAnswer": true
+                },
+                {
+                    "option": "To store a collection of unique values",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store a collection of whole numbers",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store a collection of floating point numbers",
+                    "isCorrectAnswer": false
+                }
+            ]
+        },
+        {
+            "questionText": "What is the purpose of the 'set' data type in Python?",
+            "options": [
+                {
+                    "option": "To store a collection of unique values",
+                    "isCorrectAnswer": true
+                },
+                {
+                    "option": "To store a collection of key-value pairs",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store a collection of whole numbers",
+                    "isCorrectAnswer": false
+                },
+                {
+                    "option": "To store a collection of floating point numbers",
+                    "isCorrectAnswer": false
+                }
+            ]
+        }
+    ]
+}
