@@ -1,127 +1,67 @@
 Quize_Prompt = """
-Generate questions that align with the following requirements, given a specific Topic {{Topic}} and SubTopic {{SubTopic}}. 
-Ensure your structured JSON output is correct and follows the specified format. 
-Strictly return the result in the following JSON format:
+You are designing a self-assessment quiz to evaluate understanding of a  Main Topic {Main_Topic} with/without Sub-Topics{Sub_Topics} or they might upload a document. 
+The quiz should be suitable for an audience with a level of understanding {Level_of_Understanding}. 
 
-{{
-    "title": "QuizStateBaseModel",
-    "description": "Pydantic BaseModel for a quiz. A quiz can have many questions belonging to MCQ.",
-    "attributes": {{
-        "topic": "The topic covered in this quiz.",
-        "question_count": "The total number of questions in this quiz.",
-        "question_type": "The question type of the questions in this quiz.",
-        "question": "The list of questions."
-    }},
-    "type": "object",
-    "properties": {{
-        "topic": {{
-            "title": "Topic",
-            "description": "The topic covered in this quiz.",
-            "type": "string"
-        }},
-        "question_count": {{
-            "title": "Question Count",
-            "description": "The total number of questions in this quiz.",
-            "type": "integer"
-        }},
-        "question_type": {{
-            "title": "Question Type",
-            "description": "The question type of the questions in this quiz.",
-            "enum": ["MCQ"],
-            "type": "string"
-        }},
-        "question": {{
-            "title": "Question",
-            "description": "The list of questions. Supports different types of questions.",
-            "type": "array",
-            "items": {{
-                "anyOf": [
-                    {{ "$ref": "#/definitions/MCQQuestionState" }},
-                    {{ "$ref": "#/definitions/TrueFalseQuestionState" }}
-                ]
-            }}
-        }}
-    }},
-    "required": ["topic", "question_count", "question_type", "question"],
-    "definitions": {{
-        "MCQQuestionState": {{
-            "title": "MCQQuestionState",
-            "description": "Class for a single MCQ question.",
-            "attributes": {{
-                "id": "The id of the question.",
-                "question_type": "The classification of the question data model type i.e., 'MCQ'.",
-                "question": "The text of the single-choice question.",
-                "option": "A list of possible answer options (strings).",
-                "answer": "The index of the correct answer option in the array 'option'."
-            }},
-            "type": "object",
-            "properties": {{
-                "question_type": {{
-                    "title": "Question Type",
-                    "description": "The classification of the question data model type i.e., 'MCQ'.",
-                    "enum": ["MCQ"],
-                    "type": "string"
-                }},
-                "question": {{
-                    "title": "Question",
-                    "description": "The text of the multiple-choice question.",
-                    "type": "string"
-                }},
-                "option": {{
-                    "title": "Option",
-                    "description": "A list of possible answer options (strings).",
-                    "type": "array",
-                    "items": {{
-                        "type": "string"
-                    }}
-                }},
-                "answer": {{
-                    "title": "Answer",
-                    "description": "The correct answer to the multiple-choice question, must be in the list 'option'.",
-                    "type": "string"
-                }}
-            }},
-            "required": ["question_type", "question", "option", "answer"]
-        }},
-        "TrueFalseQuestionState": {{
-            "title": "TrueFalseQuestionState",
-            "description": "Class for a single True/False question.",
-            "attributes": {{
-                "question_type": "The classification of the question data model type i.e., 'MCQ'.",
-                "question": "The text of the single-choice question.",
-                "option": "A list of possible answer options (strings). Default is ['False', 'True'].",
-                "answer": "The correct answer to the true/false question, must be in the list 'option'."
-            }},
-            "type": "object",
-            "properties": {{
-                "question_type": {{
-                    "title": "Question Type",
-                    "description": "The classification of the question data model type i.e., 'MCQ'.",
-                    "enum": ["MCQ"],
-                    "type": "string"
-                }},
-                "question": {{
-                    "title": "Question",
-                    "description": "The text of the true/false question.",
-                    "type": "string"
-                }},
-                "option": {{
-                    "title": "Option",
-                    "description": "A list of possible answer options (strings). Default is ['False', 'True'].",
-                    "default": ["False", "True"],
-                    "type": "array",
-                    "items": {{
-                        "type": "string"
-                    }}
-                }},
-                "answer": {{
-                    "title": "Answer",
-                    "description": "The correct answer to the true/false question, must be in the list 'option'.",
-                    "type": "string"
-                }}
-            }},
-            "required": ["question_type", "question", "answer"]
-        }}
-    }}
-}}
+Follow these steps to create the quiz:
+
+1. Define the Scope
+    Main Topic: {Main_Topic} [ e.g., "Machine Learning"].
+    Sub-Topics (if applicable): {Sub_Topics} [ e.g., "Supervised Learning, Unsupervised Learning, Reinforcement Learning"].
+    Level of Understanding: {Level_of_Understanding} [e.g., "Beginner, Intermediate, Expert"].
+
+2. Create Question Types:
+Include a mix of the following types of questions:
+    Multiple Choice
+    True/False
+    Fill-in-the-Blanks
+    Short Answer
+    Scenario-Based (if applicable)
+
+
+3. Craft the Questions
+For each question:
+    Clearly identify the concept or sub-topic it evaluates.
+    Consider common misconceptions to design challenging options.
+    Specify feedback for correct and incorrect answers.
+
+
+4. Organize the Quiz
+    Divide questions by sub-topic or difficulty level.
+    Start with easier questions to build confidence and progressively increase difficulty.
+
+
+5. Include Feedback and Self-Assessment Metrics
+    For each question, provide feedback (both for correct and incorrect answers).
+    After quiz completion, summarize performance:
+    Display overall score.
+    Highlight strengths and weaknesses by topic/sub-topic.
+    Offer learning recommendations for improvement.
+
+
+Example Output:
+    Question 1 ( Main Topic: {Main_Topic}):
+    "What is the primary characteristic of supervised learning?"
+    (A) Learning from unlabeled data
+    (B) Learning from labeled data
+    (C) Learning through trial and error
+    (D) Learning without feedback
+    Correct Answer: (B)
+    Feedback:
+    Correct: "Supervised learning involves learning from labeled data, where the input-output relationship is defined."
+    Incorrect: "Supervised learning differs from unsupervised learning, which deals with unlabeled data (A), or reinforcement learning, which uses trial and error (C)."
+    
+    Question 2 (Sub-Topic: {Sub_Topics}):
+    "Which algorithm is typically used in clustering?"
+    (A) K-Means
+    (B) Linear Regression
+    (C) Decision Tree
+    (D) Neural Networks
+    Correct Answer: (A)
+    Feedback:
+    Correct: "K-Means is a popular clustering algorithm in unsupervised learning."
+    Incorrect: "Linear regression (B) and decision trees (C) are generally used in supervised learning tasks."
+
+Use this structure to create quizzes for other topics or sub-topics. Add adaptive branching if needed to guide users based on their answers.
+
+
 """

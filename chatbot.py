@@ -86,6 +86,11 @@ if st.button("Generate Quiz"):
             # Extract and validate result
             raw_content = result.content if hasattr(result, "content") else str(result)
             
+            # DEBUG: Show raw content for troubleshooting
+            st.text("Raw Output:")
+            st.code(raw_content, language="json")
+
+            # Clean up and parse the JSON output
             if raw_content.startswith("```json"):
                 raw_content = raw_content.strip("```json").strip("```")
             
